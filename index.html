@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="今日の東京で何が起きているかを見て、外出先をひとつ見つける。">
+  <title>東京お出かけレーダー</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="shell">
+  <header class="site-header">
+    <a class="site-name" href="./" id="homeLink">東京お出かけレーダー</a>
+    <button class="quiet-button" id="settingsButton" type="button">条件変更</button>
+  </header>
+  <main>
+    <section id="home" class="screen">
+      <div class="date-label" id="dateLabel"></div>
+      <h1>今日、東京で何がある？</h1>
+      <p class="subhead">気になる催しを見つけたら、その街へ。</p>
+      <div class="conditions" id="conditions"></div>
+      <div id="freshnessNotice" class="notice" role="status"></div>
+      <h2 class="section-heading" id="eventsTitle">気になる催し</h2>
+      <div id="todayEvents" class="event-list"></div>
+      <div class="home-action"><button class="primary" type="button" id="recommendButton">行き先をひとつ出す →</button></div>
+      <div id="upcoming" class="upcoming" hidden><h2 class="section-heading">近日の予定</h2><div id="upcomingEvents" class="event-list"></div></div>
+      <div class="meta" id="dataFootnote"></div>
+    </section>
+    <section id="result" class="screen" hidden>
+      <button type="button" class="back-button" id="resultBack">← 戻る</button>
+      <div class="date-label">おすすめの街</div>
+      <h1 id="resultArea"></h1>
+      <div id="resultBody"></div>
+      <div class="button-row">
+        <button type="button" class="secondary" id="detailButton">詳しく見る</button>
+        <button type="button" class="primary" id="nextButton">別の街を見る →</button>
+      </div>
+      <div class="meta" id="resultFootnote"></div>
+    </section>
+    <section id="detail" class="screen" hidden>
+      <button type="button" class="back-button" id="detailBack">← 推薦に戻る</button>
+      <h1 id="detailArea"></h1>
+      <div id="detailBody"></div>
+    </section>
+  </main>
+  <footer>このサイトは試験運用中です。開催状況は公式情報をご確認ください。</footer>
+</div>
+<dialog id="settingsDialog" aria-labelledby="settingsTitle">
+  <form method="dialog" id="settingsForm">
+    <div class="dialog-heading"><h2 id="settingsTitle">条件を変更</h2><button type="button" class="close-button" id="cancelSettings" aria-label="閉じる">×</button></div>
+    <div class="field">
+      <label for="origin">出発駅</label>
+      <select id="origin" name="origin"></select>
+    </div>
+    <div class="field">
+      <label for="departureMode">出発</label>
+      <select id="departureMode" name="departureMode"><option value="now">今から</option><option value="custom">時間を指定</option></select>
+      <input id="departureTime" type="time" name="departureTime" value="13:00" hidden>
+    </div>
+    <div class="field"><label for="budget">現地で使う予算（交通費別）</label>
+      <select id="budget" name="budget"><option value="0">無料</option><option value="1000">1,000円以下</option><option value="3000">3,000円以下</option><option value="5000">5,000円以下</option><option value="-1">気にしない</option></select>
+    </div>
+    <p class="settings-help">出発駅は距離による並び替えに反映します。電車の移動時間は未計算です。</p>
+    <button type="submit" class="primary">この条件で表示</button>
+  </form>
+</dialog>
+<script src="./data/events.js"></script>
+<script src="./data/areas.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
